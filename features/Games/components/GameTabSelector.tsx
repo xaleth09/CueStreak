@@ -1,7 +1,6 @@
 import { Tabs } from '@/components/ui/Tabs';
 import { useMemo, useState } from 'react';
-import { GameNames } from '@/types/types';
-import { ALL } from 'node:dns';
+import { GameNames, GameTypes } from '@/types/types';
 
 const DEFAULT_SELECTED_TAB_ID = '8ball';
 
@@ -33,29 +32,28 @@ const TABS = [
 	},
 ];
 
-export type GameTabs = Omit<GameNames, 'banks'> | 'all'
+export type GameTabs = Exclude<keyof GameTypes, 'banks'> | 'all';
 
 type Props = {
-	selectedGame: GameTabs;
+	selectedGameTab: GameTabs;
 	onChange: (id: GameTabs) => void;
 	includeAllTab?: boolean;
+	showBottomBorder?: boolean;
 }
 
-export const GameTabSelector = ({selectedGame, onChange, includeAllTab}: Props) => {
-	const [selectedGameId, setSelectedGameId] = useState(selectedGame ?? DEFAULT_SELECTED_TAB_ID);
-
+export const GameTabSelector = ({selectedGameTab, onChange, includeAllTab, showBottomBorder}: Props) => {
 	const tabs = useMemo(() => (includeAllTab ? [ALL_TAB, ...TABS] : TABS), [includeAllTab]);
 
 	const handleTabOnChange = (id: string) => {
-		setSelectedGameId(id);
 		onChange(id as GameTabs);
 	};
 
 	return (
 		<Tabs
 			tabs={tabs}
-			defaultSelectedId={DEFAULT_SELECTED_TAB_ID}
+			selectedTabId={selectedGameTab as string}
 			onChange={handleTabOnChange}
+			showBottomBorder={showBottomBorder}
 		/>
 	);
 };
