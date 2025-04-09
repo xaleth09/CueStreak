@@ -56,7 +56,7 @@ const BaseButtonComponent = styled(Pressable)<BaseButtonStyleProps>`
        }) => `
         background-color: ${backgroundColor};
        	color: ${textColor};
-       	${height ? `height: ${height};` : ''}
+       	${height ? `height: ${height}px;` : ''}
        	width: ${width ? width : 'auto'};
         padding: ${paddingVertical}px ${paddingHorizontal}px;
         border-style: solid;
