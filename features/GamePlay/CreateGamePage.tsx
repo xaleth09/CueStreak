@@ -168,13 +168,12 @@ export default function CreateGamePage({}: Props) {
 				horizontalAlignment={'spaceBetween'}
 				paddingHorizontal={SIZES.XS.val}
 				gap={SIZES.XS.val}
-				backgroundColor={'goldenrod'}
 				// paddingTop={SIZES.LG.val}
 			>
-				<Column backgroundColor={'skyblue'} flexGrow={1} gap={SIZES.XXXS.val}>
-					<H3 style={{backgroundColor: 'orange'}}>Games</H3>
+				<Column flexGrow={1} gap={SIZES.XXXS.val}>
+					<H3>Games</H3>
 
-					<Row columnGap={SIZES.SM.val}  horizontalAlignment="spaceBetween">
+					<Row columnGap={SIZES.SM.val} horizontalAlignment="spaceBetween">
 						<NumberInputBox
 							flexShrink={1}
 							horizontalAlignment="center"
@@ -197,9 +196,9 @@ export default function CreateGamePage({}: Props) {
 				</Column>
 
 				{showBallCountInputs ? (
-					<Column backgroundColor={'limegreen'} flexGrow={1} gap={SIZES.XXXS.val}>
-						<H3 style={{backgroundColor: 'orchid', width: 100}}>Balls</H3>
-						<Row columnGap={SIZES.SM.val}  horizontalAlignment="spaceBetween">
+					<Column flexGrow={isHandicapped ? 1 : 0} gap={SIZES.XXXS.val}>
+						<H3>Balls</H3>
+						<Row columnGap={SIZES.SM.val} horizontalAlignment="spaceBetween">
 							<NumberInputBox
 								flexShrink={1}
 								horizontalAlignment="center"
