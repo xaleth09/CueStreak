@@ -23,22 +23,19 @@ const ToggleButton = styled(View)`
 
 type Props = {
 	label?: string;
-	defaultValue?: boolean;
-	onChange: (value: boolean) => void;
+	value: boolean;
+	onPress: (value: boolean) => void;
 }
 
 export const Switch = ({
 						   label,
-						   defaultValue,
-						   onChange,
+						   value,
+						   onPress,
 					   }: Props) => {
-	const [on, setOn] = useState(defaultValue);
 
 	const handleOnPress = () => {
-		setOn((prevOn) => {
-			onChange?.(!prevOn);
-			return !prevOn;
-		});
+		console.log("value",value, "!value", !value)
+			onPress?.(!value);
 	};
 
 	return (
@@ -48,8 +45,8 @@ export const Switch = ({
 					{label}
 				</Body>
 				<Track flexShrink={1}
-					   backgroundColor={on ? 'dodgerblue' : 'dimgrey'}
-					   horizontalAlignment={on ? 'right' : 'left'}
+					   backgroundColor={value ? 'dodgerblue' : 'dimgrey'}
+					   horizontalAlignment={value ? 'right' : 'left'}
 				>
 					<ToggleButton/>
 				</Track>

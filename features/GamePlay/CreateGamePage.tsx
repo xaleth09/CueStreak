@@ -39,8 +39,6 @@ const DEFAULT_WIN_CRITERIA_BY_GAME = {
 	},
 };
 
-const DEFAULT_HANDICAPPED_RACE = false;
-
 const DEFAULT_INPUT_STATE = {
 	player1Name: '',
 	player1Games: undefined,
@@ -99,7 +97,7 @@ export default function CreateGamePage({}: Props) {
 
 	const [inputValues, setInputValue] = useState({});
 	const [selectedGame, setSelectedGame] = useState<GameTabs>('8ball');
-	const [isHandicapped, setIsHandicapped] = useState(DEFAULT_HANDICAPPED_RACE);
+	const [isHandicapped, setIsHandicapped] = useState(false);
 
 	const handleOnChange = (id: GameTabs) => {
 		setSelectedGame(id);
@@ -121,20 +119,24 @@ export default function CreateGamePage({}: Props) {
 				color={'black'}
 				onPress={handleNavToHomePage}
 			/>
+			<Switch label={'Handicapped?'}
+					value={isHandicapped}
+					onPress={handleHandicappedOnChange}
+			/>
 		</NavBar>
-	), []);
+	), [isHandicapped]);
 
 	const handleNavToHomePage = useCallback(() => {
-		router.push('/(tabs)/(home)')
-	}, [])
+		router.push('/(tabs)/(home)');
+	}, []);
 
 	const handleNavToGamePlay = useCallback(() => {
-		router.push('/(tabs)/(game_play)')
-	}, [])
+		router.push('/(tabs)/(game_play)');
+	}, []);
 
-	const playButton  = useCallback(() => (
-		<IconButton iconName='play.fill' onPress={handleNavToGamePlay} />
-	), [])
+	const playButton = useCallback(() => (
+		<IconButton iconName="play.fill" onPress={handleNavToGamePlay}/>
+	), []);
 
 	const showBallCountInputs = selectedGame === 'onePocket' || selectedGame === 'straightPool';
 
@@ -147,15 +149,10 @@ export default function CreateGamePage({}: Props) {
 			<Row flexShrink={1}
 				 wrap={'wrap'}
 				 verticalAlignment="center"
-				 horizontalAlignment="spaceBetween"
 				 columnGap={SIZES.MD.val}
 			>
 				{/* @ts-ignore*/}
 				<H1>{HEADER_TAB_MAP[selectedGame]}</H1>
-				<Switch label={'Handicapped?'}
-						onChange={handleHandicappedOnChange}
-						defaultValue={DEFAULT_HANDICAPPED_RACE}
-				/>
 			</Row>
 
 			<Row gap={SIZES.XXS.val}>
@@ -168,26 +165,28 @@ export default function CreateGamePage({}: Props) {
 
 			<Row
 				wrap="wrap"
-				gap={SIZES.XS.val}
+				horizontalAlignment={'spaceBetween'}
 				paddingHorizontal={SIZES.XS.val}
+				gap={SIZES.XS.val}
+				backgroundColor={'goldenrod'}
 				// paddingTop={SIZES.LG.val}
 			>
-				<Column flexGrow={1} gap={SIZES.XXXS.val}>
-					<H3>Games</H3>
+				<Column backgroundColor={'skyblue'} flexGrow={1} gap={SIZES.XXXS.val}>
+					<H3 style={{backgroundColor: 'orange'}}>Games</H3>
 
-					<Row columnGap={SIZES.SM.val} horizontalAlignment="center">
-						<NumberInputBox flexGrow={isHandicapped ? 1 : 0}
-										flexShrink={1}
-										horizontalAlignment="center"
+					<Row columnGap={SIZES.SM.val}  horizontalAlignment="spaceBetween">
+						<NumberInputBox
+							flexShrink={1}
+							horizontalAlignment="center"
 						>
 							<NumberInput placeholder="10"
 										 enterKeyHint="next"
 							/>
 						</NumberInputBox>
 						{isHandicapped ? (
-							<NumberInputBox flexGrow={1}
-											flexShrink={1}
-											horizontalAlignment="center"
+							<NumberInputBox
+								flexShrink={1}
+								horizontalAlignment="center"
 							>
 								<NumberInput placeholder="10"
 											 enterKeyHint="next"
@@ -198,21 +197,21 @@ export default function CreateGamePage({}: Props) {
 				</Column>
 
 				{showBallCountInputs ? (
-					<Column flexGrow={1} gap={SIZES.XXXS.val}>
-						<H3>Balls</H3>
-						<Row columnGap={SIZES.SM.val} horizontalAlignment="center">
-							<NumberInputBox flexGrow={isHandicapped ? 1 : 0}
-											flexShrink={1}
-											horizontalAlignment="center"
+					<Column backgroundColor={'limegreen'} flexGrow={1} gap={SIZES.XXXS.val}>
+						<H3 style={{backgroundColor: 'orchid', width: 100}}>Balls</H3>
+						<Row columnGap={SIZES.SM.val}  horizontalAlignment="spaceBetween">
+							<NumberInputBox
+								flexShrink={1}
+								horizontalAlignment="center"
 							>
 								<NumberInput placeholder="10"
 											 enterKeyHint="done"
 								/>
 							</NumberInputBox>
 							{isHandicapped ? (
-								<NumberInputBox flexGrow={1}
-												flexShrink={1}
-												horizontalAlignment="center"
+								<NumberInputBox
+									flexShrink={1}
+									horizontalAlignment="center"
 								>
 									<NumberInput placeholder="10"
 												 enterKeyHint="next"
