@@ -44,7 +44,6 @@ export const BasePage = ({
 						 }: Props) => {
 
 	const {bottom} = useSafeAreaInsets();
-	console.log(bottom)
 
 	return (
 		<SafeAreaView style={{flex: 1}}>
