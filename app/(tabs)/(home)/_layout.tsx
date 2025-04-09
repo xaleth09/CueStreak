@@ -1,6 +1,5 @@
-import {Stack, Tabs} from 'expo-router';
+import {Stack} from 'expo-router';
 import React from 'react';
-import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function HomeLayout() {
   return (
@@ -9,8 +8,7 @@ export default function HomeLayout() {
         headerShown: false,
       }}>
       <Stack.Screen
-        name="(home)"
-
+        name="index"
         options={{
           title: 'Home'
         }}
