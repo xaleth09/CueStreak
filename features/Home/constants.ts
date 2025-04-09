@@ -1,3 +1,5 @@
+import { GameTabs } from '@/features/Games/components/GameTabSelector';
+
 export const FAKE_LAST_5_GAMES = [
 	{
 		id: 1,
@@ -45,3 +47,20 @@ export const FAKE_LAST_5_GAMES = [
 		opponentScore: 8,
 	},
 ];
+
+type WinLossStats = {
+	totalGames: number;
+	wins: number;
+	losses: number;
+};
+
+export const FAKE_WIN_LOSS_STATS: Record<GameTabs, WinLossStats> = {
+	all: { totalGames: 138, wins: 79, losses: 59 },
+	'8ball': { totalGames: 42, wins: 28, losses: 14 },
+	'9ball': { totalGames: 25, wins: 11, losses: 14 },
+	'10ball': { totalGames: 18, wins: 9, losses: 9 },
+	onePocket: { totalGames: 20, wins: 12, losses: 8 },
+	straightPool: { totalGames: 33, wins: 19, losses: 14 },
+};
+
+
