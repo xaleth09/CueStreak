@@ -108,7 +108,7 @@ export default function CreateGamePage({}: Props) {
 	};
 
 	const bottomGameTabs = useCallback(() => (
-		<GameTabSelector onChange={handleOnChange} selectedGame={selectedGame}/>
+		<GameTabSelector onChange={handleOnChange} selectedGameTab={selectedGame} showBottomBorder/>
 	), [handleOnChange, selectedGame]);
 
 	const navBar = useCallback(() => (
