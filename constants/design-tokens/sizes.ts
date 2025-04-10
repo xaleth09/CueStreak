@@ -83,6 +83,8 @@ export const MEDIA = {
     DESKTOP: {val: 2560, px: '2560px'},
 } as const;
 
+export const TAB_BAR_HEIGHT = 50;
+
 export type SizeKeys = keyof typeof SIZES;
 export type SizeValues = (typeof SIZES)[keyof typeof SIZES];
 export type SpacingKeys = keyof typeof SPACING;

@@ -4,13 +4,17 @@ import React, { useCallback, useState } from 'react';
 import { TextInput as RNTextInput } from 'react-native';
 import { Column, Row } from '@/components/ui/Flex/Flex';
 import styled from 'styled-components/native';
-import { GameTabs, GameTabSelector } from '@/features/Games/components/GameTabSelector';
+import { GameTabKey, GameTabSelector } from '@/features/Games/components/GameTabSelector';
 import { Switch } from '@/components/ui/Switch';
 import { SIZES } from '@/constants/design-tokens';
 import { NavBar } from '@/components/ui/NavBar/NavBar';
 import { IconSymbol } from '@/components/ui/Icons/IconSymbol';
 import { IconButton } from '@/components/ui/Buttons/IconButton';
 import { useRouter } from 'expo-router';
+import { WinCriteriaNumInput } from '@/features/GamePlay/components/WinCriteriaNumInput';
+import { WinCriteriaInputGroup } from '@/features/GamePlay/components/WinCriteriaInputGroup';
+import { GameSelectorHeading } from '@/features/GamePlay/components/GameSelectorHeading';
+import { NavBackIcon } from '@/components/ui/NavBar/NavBackIcon';
 
 const DEFAULT_WIN_CRITERIA_BY_GAME = {
 	'8ball': {
@@ -48,13 +52,6 @@ const DEFAULT_INPUT_STATE = {
 	player2Balls: undefined,
 };
 
-const HEADER_TAB_MAP = {
-	'8ball': '8 Ball',
-	'9ball': '9 Ball',
-	'10ball': '10 Ball',
-	'onePocket': 'One Pocket',
-	'straightPool': 'Straight Pool',
-};
 
 const PlayerNameInput = styled(RNTextInput)<{ underline?: boolean }>`
     flex-grow: 1;
@@ -75,20 +72,6 @@ const GiantVS = styled(H1)`
     text-align: center;
 `;
 
-const NumberInputBox = styled(Column).attrs({
-	backgroundColor: 'white',
-})`
-    height: 164px;
-    min-width: 164px;
-    border: solid 1px darkgrey;
-    border-radius: ${SIZES.MD.px};
-`;
-
-const NumberInput = styled(RNTextInput).attrs({})`
-    height: 100%;
-    font-size: 84px;
-    margin-bottom: 0;
-`;
 
 type Props = {}
 
@@ -96,10 +79,10 @@ export default function CreateGamePage({}: Props) {
 	const router = useRouter();
 
 	const [inputValues, setInputValue] = useState({});
-	const [selectedGame, setSelectedGame] = useState<GameTabs>('8ball');
+	const [selectedGame, setSelectedGame] = useState<GameTabKey>('8ball');
 	const [isHandicapped, setIsHandicapped] = useState(false);
 
-	const handleOnChange = (id: GameTabs) => {
+	const handleSelectedGameOnChange = (id: GameTabKey) => {
 		setSelectedGame(id);
 	};
 
@@ -108,17 +91,11 @@ export default function CreateGamePage({}: Props) {
 	};
 
 	const bottomGameTabs = useCallback(() => (
-		<GameTabSelector onChange={handleOnChange} selectedGameTab={selectedGame} showBottomBorder/>
-	), [handleOnChange, selectedGame]);
+		<GameTabSelector onChange={handleSelectedGameOnChange} selectedGameTab={selectedGame} showBottomBorder/>
+	), [handleSelectedGameOnChange, selectedGame]);
 
 	const navBar = useCallback(() => (
-		<NavBar>
-			<IconSymbol
-				name="chevron.backward"
-				size={SIZES.MD.val}
-				color={'black'}
-				onPress={handleNavToHomePage}
-			/>
+		<NavBar horizontalAlignment='right'>
 			<Switch label={'Handicapped?'}
 					value={isHandicapped}
 					onPress={handleHandicappedOnChange}
@@ -141,19 +118,10 @@ export default function CreateGamePage({}: Props) {
 	const showBallCountInputs = selectedGame === 'onePocket' || selectedGame === 'straightPool';
 
 	return (
-		<BasePage paddingVertical={0}
-				  renderNavBarComponent={navBar}
+		<BasePage renderNavBarComponent={navBar}
 				  renderFABComponent={playButton}
-				  renderBottomComponent={bottomGameTabs}
 		>
-			<Row flexShrink={1}
-				 wrap={'wrap'}
-				 verticalAlignment="center"
-				 columnGap={SIZES.MD.val}
-			>
-				{/* @ts-ignore*/}
-				<H1>{HEADER_TAB_MAP[selectedGame]}</H1>
-			</Row>
+			<GameSelectorHeading selectedGame={selectedGame} onChange={handleSelectedGameOnChange}/>
 
 			<Row gap={SIZES.XXS.val}>
 				<GiantVS>VS</GiantVS>
@@ -168,57 +136,22 @@ export default function CreateGamePage({}: Props) {
 				horizontalAlignment={'spaceBetween'}
 				paddingHorizontal={SIZES.XS.val}
 				gap={SIZES.XS.val}
-				// paddingTop={SIZES.LG.val}
 			>
-				<Column flexGrow={1} gap={SIZES.XXXS.val}>
-					<H3>Games</H3>
-
-					<Row columnGap={SIZES.SM.val} horizontalAlignment="spaceBetween">
-						<NumberInputBox
-							flexShrink={1}
-							horizontalAlignment="center"
-						>
-							<NumberInput placeholder="10"
-										 enterKeyHint="next"
-							/>
-						</NumberInputBox>
-						{isHandicapped ? (
-							<NumberInputBox
-								flexShrink={1}
-								horizontalAlignment="center"
-							>
-								<NumberInput placeholder="10"
-											 enterKeyHint="next"
-								/>
-							</NumberInputBox>
-						) : null}
-					</Row>
-				</Column>
-
+				<WinCriteriaInputGroup
+					label="Games"
+					placeholder="10"
+					primaryInputValue={''}
+					handicappedInputValue={''}
+					showHandicappedInput={isHandicapped}
+				/>
 				{showBallCountInputs ? (
-					<Column flexGrow={isHandicapped ? 1 : 0} gap={SIZES.XXXS.val}>
-						<H3>Balls</H3>
-						<Row columnGap={SIZES.SM.val} horizontalAlignment="spaceBetween">
-							<NumberInputBox
-								flexShrink={1}
-								horizontalAlignment="center"
-							>
-								<NumberInput placeholder="10"
-											 enterKeyHint="done"
-								/>
-							</NumberInputBox>
-							{isHandicapped ? (
-								<NumberInputBox
-									flexShrink={1}
-									horizontalAlignment="center"
-								>
-									<NumberInput placeholder="10"
-												 enterKeyHint="next"
-									/>
-								</NumberInputBox>
-							) : null}
-						</Row>
-					</Column>
+					<WinCriteriaInputGroup
+						label="Balls"
+						placeholder={selectedGame === 'straightPool' ? '100' : '8'}
+						primaryInputValue={''}
+						handicappedInputValue={''}
+						showHandicappedInput={isHandicapped}
+					/>
 				) : null}
 			</Row>
 

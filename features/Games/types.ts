@@ -1,7 +1,7 @@
 import { MatchStatus } from '@/types/types';
 
 export type GameHighlight = {
-    id: number,
+    id: string,
     gameNum: number;
     opponentName: string;
     status?: MatchStatus;

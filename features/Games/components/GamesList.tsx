@@ -7,13 +7,12 @@ import { useCallback } from 'react';
 import { useRouter } from 'expo-router';
 
 const BorderedRow = styled(Row)<{ lastRow: boolean }>`
-    ${({lastRow}) => `
-    	${!lastRow ? `
+    ${({lastRow}) => !lastRow ? `
     		border-bottom-width: 1px;
     		border-bottom-color: dimgrey;
     		border-bottom-style: solid;
-    	` : ''}
-    `}
+    	` : ''
+    }
 `;
 
 type Props = {
@@ -25,7 +24,7 @@ export const GamesList = ({games}: Props) => {
 
 	const handleNavigateToGameDetails = useCallback((id: string) => {
 		router.push('/(tabs)/(games)/game_details');
-	}, [])
+	}, []);
 
 	return (
 		<View>
@@ -40,14 +39,16 @@ export const GamesList = ({games}: Props) => {
 							opponentScore,
 						}, index) => (
 				<BorderedRow key={id} lastRow={index === games.length - 1}>
-					<GameHighlightRow gameNum={gameNum}
-									  opponentName={opponentName}
-									  status={status}
-									  won={won}
-									  winCriteria={winCriteria}
-									  playerScore={playerScore}
-									  opponentScore={opponentScore}
-									  onPress={handleNavigateToGameDetails}
+					<GameHighlightRow
+						id={id}
+						gameNum={gameNum}
+						opponentName={opponentName}
+						status={status}
+						won={won}
+						winCriteria={winCriteria}
+						playerScore={playerScore}
+						opponentScore={opponentScore}
+						onPress={handleNavigateToGameDetails}
 					/>
 				</BorderedRow>
 			))}

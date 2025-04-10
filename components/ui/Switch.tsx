@@ -34,7 +34,6 @@ export const Switch = ({
 					   }: Props) => {
 
 	const handleOnPress = () => {
-		console.log("value",value, "!value", !value)
 			onPress?.(!value);
 	};
 

@@ -7,7 +7,7 @@ type GetButtonColorsOptions = {
 
 const themeColors = {
 	primary: 'royalblue',
-	secondary: 'mediumseagreen',
+	secondary: 'limegreen',
 	tertiary: 'slategray',
 	destructive: 'crimson',
 	disabledText: 'gray',

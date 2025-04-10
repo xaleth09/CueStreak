@@ -1,8 +1,14 @@
-import { H1 } from '@/components/ui/Typography';
+import { H1, H3 } from '@/components/ui/Typography';
 import { UserStats } from '@/types/types';
 import { BasePage } from '@/components/ui/PageLayouts/BasePage';
 import { StatsCard } from '@/features/Home/components/StatsCard';
 import { RecentGamesSection } from './components/RecentGamesSection';
+import { useCallback } from 'react';
+import { NavBar } from '@/components/ui/NavBar/NavBar';
+import { SIZES } from '@/constants/design-tokens';
+import { Divider } from '@/components/ui/Divider';
+import { IconSymbol } from '@/components/ui/Icons/IconSymbol';
+import { Row } from '@/components/ui/Flex/Flex';
 
 const FAKE_USER_STAT = {
 	totalWins: 1,
@@ -53,10 +59,22 @@ export default function HomeScreen() {
 	// @ts-ignore
 	const {winPercentage} = getUIUserStats(stats);
 
+	const navBar = useCallback(() => (
+		<NavBar horizontalAlignment='left'>
+			<Row verticalAlignment='center' gap={SIZES.XXS.val}>
+				<IconSymbol name="list.dash" color="black" size={28}/>
+				<H3>{nickname ?? 'Hello!'}</H3>
+			</Row>
+		</NavBar>
+	), [nickname]);
+
 	return (
-		<BasePage hasTabBar gap={24}>
-			<H1>{nickname}</H1>
+		<BasePage hasTabBar
+				  gap={SIZES.SM.val}
+				  renderNavBarComponent={navBar}
+		>
 			<StatsCard/>
+			<Divider/>
 			<RecentGamesSection/>
 		</BasePage>
 	);

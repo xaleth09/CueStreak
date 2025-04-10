@@ -8,9 +8,9 @@ import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { TAB_BAR_HEIGHT } from '@/constants/Sizes';
 import { useNavigationState, useRoute } from '@react-navigation/native';
 import { ROUTES_WITHOUT_TAB_BAR, RoutesWithoutTabBar } from '@/app/_routesWithoutTabBar';
+import { SIZES, TAB_BAR_HEIGHT } from '@/constants/design-tokens';
 
 export default function TabLayout() {
 	const colorScheme = useColorScheme();
@@ -27,8 +27,6 @@ export default function TabLayout() {
 		return nestedRoute?.name ?? tabRoute.name;
 	});
 
-	console.log('rawr', activeNestedRouteName);
-
 	const shouldHideTabBar = useMemo(() => {
 		return ROUTES_WITHOUT_TAB_BAR[activeNestedRouteName as RoutesWithoutTabBar];
 	}, [activeNestedRouteName]);
@@ -43,7 +41,6 @@ export default function TabLayout() {
 				tabBarStyle: shouldHideTabBar ? {
 					display: 'none',
 					height: 0,
-					backgroundColor: 'orchid'
 				} : Platform.select({
 					ios: {
 						// Use a transparent background on iOS to show the blur effect
@@ -60,21 +57,21 @@ export default function TabLayout() {
 				name="(home)"
 				options={{
 					title: 'Home',
-					tabBarIcon: ({color}) => <IconSymbol size={28} name="house.fill" color={color}/>,
+					tabBarIcon: ({color}) => <IconSymbol size={SIZES.LG.val} name="house.fill" color={color}/>,
 				}}
 			/>
 			<Tabs.Screen
 				name="(game_play)"
 				options={{
 					title: '',
-					tabBarIcon: ({color}) => <IconSymbol size={64} name="plus.circle.fill" color={'limegreen'}/>,
+					tabBarIcon: ({color}) => <IconSymbol size={SIZES.XXL.val} name="plus.circle.fill" color='royalblue'/>,
 				}}
 			/>
 			<Tabs.Screen
 				name="(games)"
 				options={{
 					title: 'Games',
-					tabBarIcon: ({color}) => <IconSymbol size={28} name="calendar.badge.clock" color={color}/>,
+					tabBarIcon: ({color}) => <IconSymbol size={SIZES.LG.val} name="calendar.badge.clock" color={color}/>,
 				}}
 			/>
 		</Tabs>

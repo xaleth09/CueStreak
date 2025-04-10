@@ -4,6 +4,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { SymbolWeight } from 'expo-symbols';
 import React from 'react';
 import { OpaqueColorValue, Pressable, StyleProp, ViewStyle } from 'react-native';
+import { SIZES } from '@/constants/design-tokens';
 
 // Add your SFSymbol to MaterialIcons mappings here.
 const MAPPING = {
@@ -29,7 +30,7 @@ export type IconSymbolName = keyof typeof MAPPING;
  */
 export function IconSymbol({
 							   name,
-							   size = 24,
+							   size = SIZES.MD.val,
 							   color,
 							   style,
 							   onPress,

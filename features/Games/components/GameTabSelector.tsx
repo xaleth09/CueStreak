@@ -2,7 +2,13 @@ import { Tabs } from '@/components/ui/Tabs';
 import { useMemo, useState } from 'react';
 import { GameNames, GameTypes } from '@/types/types';
 
-const DEFAULT_SELECTED_TAB_ID = '8ball';
+export const HEADER_TAB_MAP = {
+	'8ball': '8 Ball',
+	'9ball': '9 Ball',
+	'10ball': '10 Ball',
+	'onePocket': 'One Pocket',
+	'straightPool': 'Straight Pool',
+};
 
 const ALL_TAB = {
 	id: 'all',
@@ -32,11 +38,11 @@ const TABS = [
 	},
 ];
 
-export type GameTabs = Exclude<keyof GameTypes, 'banks'> | 'all';
+export type GameTabKey = Exclude<keyof GameTypes, 'banks'> | 'all';
 
 type Props = {
-	selectedGameTab: GameTabs;
-	onChange: (id: GameTabs) => void;
+	selectedGameTab: GameTabKey;
+	onChange: (id: GameTabKey) => void;
 	includeAllTab?: boolean;
 	showBottomBorder?: boolean;
 }
@@ -45,7 +51,7 @@ export const GameTabSelector = ({selectedGameTab, onChange, includeAllTab, showB
 	const tabs = useMemo(() => (includeAllTab ? [ALL_TAB, ...TABS] : TABS), [includeAllTab]);
 
 	const handleTabOnChange = (id: string) => {
-		onChange(id as GameTabs);
+		onChange(id as GameTabKey);
 	};
 
 	return (

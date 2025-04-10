@@ -4,6 +4,7 @@ import { MatchStatus } from '@/types/types';
 import { Pressable } from 'react-native';
 import styled from 'styled-components/native';
 import { useState } from 'react';
+import { SIZES } from '@/constants/design-tokens';
 
 const PressableWrapper = styled(Pressable)<{ pressed: boolean }>`
     flex-grow: 1;
@@ -24,7 +25,16 @@ type Props = {
 	onPress?: (id: string) => void;
 }
 
-export const GameHighlightRow = ({id, gameNum, opponentName, won, winCriteria, playerScore, opponentScore, onPress}: Props) => {
+export const GameHighlightRow = ({
+									 id,
+									 gameNum,
+									 opponentName,
+									 won,
+									 winCriteria,
+									 playerScore,
+									 opponentScore,
+									 onPress
+								 }: Props) => {
 	const [pressed, setPressed] = useState(false);
 
 	const handleOnPressIn = () => {
@@ -33,7 +43,7 @@ export const GameHighlightRow = ({id, gameNum, opponentName, won, winCriteria, p
 
 	const handleOnPress = () => {
 		onPress?.(id);
-	}
+	};
 
 	const handleOnPressOut = () => {
 		setPressed(false);
@@ -49,27 +59,34 @@ export const GameHighlightRow = ({id, gameNum, opponentName, won, winCriteria, p
 		>
 			<Row
 				flexGrow={1}
+				flexShrink={1}
 				horizontalAlignment="spaceBetween"
 				verticalAlignment="center"
-				paddingVertical={12}
-				paddingHorizontal={8}
+				paddingVertical={SIZES.XS.val}
+				paddingHorizontal={SIZES.XXS.val}
 			>
+
 				<Column flexGrow={1}
 						flexShrink={1}
 						flexBasis="33%"
-						gap={8}
+						rowGap={SIZES.XXS.val}
 				>
 					<Body>Game {gameNum}</Body>
-					<Body numberOfLines={1} ellipsizeMode='tail'>VS. {opponentName}</Body>
+					<Body numberOfLines={1} ellipsizeMode="tail">VS. {opponentName}</Body>
 				</Column>
-				<Row flexGrow={0}
-					 flexShrink={0}
+
+				<Row flexGrow={1}
+					 flexShrink={1}
 					 flexBasis="34%"
+					 paddingHorizontal={SIZES.XXXS.val}
 					 horizontalAlignment="center"
-					 gap={4}
+					 columnGap={4}
 				>
-					<H4>{playerScore}</H4><H4>-</H4><H4>{opponentScore}</H4>
+					<H4 numberOfLines={1}>{playerScore}</H4>
+					<H4>-</H4>
+					<H4>{opponentScore}</H4>
 				</Row>
+
 				<Row flexGrow={1}
 					 flexShrink={1}
 					 flexBasis="33%"
@@ -77,7 +94,9 @@ export const GameHighlightRow = ({id, gameNum, opponentName, won, winCriteria, p
 					 columnGap={24}
 					 verticalAlignment="center"
 				>
-					<H2>{won ? 'Win!' : 'Loss'}</H2>
+					<H2 numberOfLines={1} ellipsizeMode="tail">
+						{won ? 'Win!' : 'Loss'}
+					</H2>
 				</Row>
 			</Row>
 		</PressableWrapper>

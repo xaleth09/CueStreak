@@ -1,4 +1,4 @@
-import { GameTabs } from '@/features/Games/components/GameTabSelector';
+import { GameTabKey } from '@/features/Games/components/GameTabSelector';
 
 export const FAKE_LAST_5_GAMES = [
 	{
@@ -7,7 +7,7 @@ export const FAKE_LAST_5_GAMES = [
 		opponentName: 'Dr. Zoidberg',
 		won: true,
 		winCriteria: 5,
-		playerScore: 5,
+		playerScore: 100,
 		opponentScore: 0,
 	},
 	{
@@ -54,7 +54,7 @@ type WinLossStats = {
 	losses: number;
 };
 
-export const FAKE_WIN_LOSS_STATS: Record<GameTabs, WinLossStats> = {
+export const FAKE_WIN_LOSS_STATS: Record<GameTabKey, WinLossStats> = {
 	all: { totalGames: 138, wins: 79, losses: 59 },
 	'8ball': { totalGames: 42, wins: 28, losses: 14 },
 	'9ball': { totalGames: 25, wins: 11, losses: 14 },

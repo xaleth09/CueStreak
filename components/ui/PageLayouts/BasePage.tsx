@@ -1,28 +1,33 @@
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
-import { TAB_BAR_HEIGHT } from '@/constants/Sizes';
 import React from 'react';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Column, Row } from '../Flex/Flex';
 import { BaseFlexProps } from '@/components/ui/Flex/types';
-import { SIZES } from '@/constants/design-tokens';
+import { SIZES, TAB_BAR_HEIGHT } from '@/constants/design-tokens';
 import { View } from 'react-native';
 import styled from 'styled-components/native';
+import { NAV_BAR_MIN_HEIGHT } from '@/components/ui/NavBar/constants';
 
 const BASE_BOTTOM_FAB_ADJUSTMENT = 80;
 
-const FloatingActionButton = styled(View)<{bottomPosition: number}>`
-	position: absolute;
-	right: 32px;
-	${({bottomPosition}) => `
-		bottom: ${bottomPosition};
-	`}
+const NavBarWrapper = styled(Row)`
+	min-height: ${NAV_BAR_MIN_HEIGHT}px;
 `
+
+const FloatingActionButton = styled(View)<{ bottomPosition: number }>`
+    position: absolute;
+    right: ${SIZES.LG.px};
+    ${({bottomPosition}) => `
+		bottom: ${bottomPosition}px;
+	`}
+`;
 
 type BaseProps = Pick<BaseFlexProps, 'gap' | 'columnGap' | 'rowGap'> & {
 	hasTabBar?: boolean;
 	paddingVertical?: number;
 	paddingHorizontal?: number;
 	renderNavBarComponent?: () => React.ReactNode;
+	renderHeaderComponent?: () => React.ReactNode;
 	renderFABComponent?: () => React.ReactNode;
 	renderBottomComponent?: () => React.ReactNode;
 	children: React.ReactNode;
@@ -33,25 +38,24 @@ type Props = BaseProps & { padding?: number } | BaseProps & {}
 export const BasePage = ({
 							 hasTabBar,
 							 paddingHorizontal = SIZES.SM.val,
-							 paddingVertical = SIZES.XS.val,
+							 paddingVertical,
 							 gap,
 							 columnGap,
 							 rowGap,
 							 renderNavBarComponent,
+							 renderHeaderComponent,
 							 renderFABComponent,
 							 renderBottomComponent,
 							 children
 						 }: Props) => {
-
 	const {bottom} = useSafeAreaInsets();
 
 	return (
 		<SafeAreaView style={{flex: 1}}>
-			{renderNavBarComponent ? (
-				<Row paddingHorizontal={paddingHorizontal}>
-					{renderNavBarComponent?.()}
-				</Row>
-			) : null}
+			<NavBarWrapper paddingHorizontal={paddingHorizontal} style={{minHeight: NAV_BAR_MIN_HEIGHT}}>
+				{renderNavBarComponent ? renderNavBarComponent() : <></>}
+			</NavBarWrapper>
+			{renderHeaderComponent?.()}
 			<KeyboardAwareScrollView
 				style={{flex: 1}}
 				contentContainerStyle={{
@@ -74,7 +78,9 @@ export const BasePage = ({
 					{renderBottomComponent?.()}
 				</Column>
 			) : null}
-			<FloatingActionButton bottomPosition={hasTabBar ? TAB_BAR_HEIGHT + bottom : BASE_BOTTOM_FAB_ADJUSTMENT + bottom}>
+			<FloatingActionButton
+				bottomPosition={hasTabBar ? TAB_BAR_HEIGHT + bottom : BASE_BOTTOM_FAB_ADJUSTMENT + bottom}
+			>
 				{renderFABComponent?.()}
 			</FloatingActionButton>
 		</SafeAreaView>
