@@ -38,7 +38,7 @@ type Props = BaseProps & { padding?: number } | BaseProps & {}
 export const BasePage = ({
 							 hasTabBar,
 							 paddingHorizontal = SIZES.SM.val,
-							 paddingVertical,
+							 paddingVertical = SIZES.NONE.val,
 							 gap,
 							 columnGap,
 							 rowGap,
@@ -63,7 +63,8 @@ export const BasePage = ({
 					paddingBottom: hasTabBar ? TAB_BAR_HEIGHT : 0,
 				}}
 			>
-				<Column paddingVertical={paddingVertical}
+				<Column paddingTop={paddingVertical}
+						paddingBottom={paddingVertical + SIZES.SM.val}
 						paddingHorizontal={paddingHorizontal}
 						gap={gap}
 						columnGap={columnGap}
