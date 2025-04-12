@@ -5,6 +5,8 @@
 
 // A Competitor is the match-specific entity representing a solo player or team.
 // Even in a 1v1, a new Competitor record is created for match-specific state.
+import { GameTypeKeysWithAll } from '@/features/Games/constants';
+
 export interface Competitor {
 	id: string;             // Unique within the match
 	name: string;           // Team name or individual name
@@ -22,61 +24,14 @@ export interface Competitor {
 // "purePoints": game is scored purely on accumulated points.
 export type GameWinningCriteria = 'ballCount' | 'winLoss' | 'purePoints';
 
-export type GameTypes = {
-	'8ball': {
-		name: {
-			full: '8ball',
-			short: '8'
-		},
-		winCriteriaPerGame: 'winLoss';
-	},
-	'9ball': {
-		name: {
-			full: '9ball',
-			short: '9'
-		},
-		winCriteriaPerGame: 'winLoss';
-	},
-	'10ball': {
-		name: {
-			full: '10ball',
-			short: '10'
-		},
-		winCriteriaPerGame: 'winLoss';
-	},
-	'onePocket': {
-		name: {
-			full: 'onePocket',
-			short: '1Pkt'
-		},
-		winCriteriaPerGame: 'ballCount';
-	},
-	'straightPool': {
-		name: {
-			full: 'Straight Pool',
-			short: '14.1'
-		},
-		winCriteriaPerGame: 'ballCount';
-	},
-	'banks': {
-		name: {
-			full: 'Banks',
-			short: 'Banks'
-		},
-		winCriteriaPerGame: 'ballCount';
-	}
-}
 
-export type GameNames = keyof GameTypes;
-
-export type GameType = keyof GameTypes;
 export type MatchStatus = 'ongoing' | 'completed' | 'forfeited' | 'aborted';
 export type MatchType = 'traditional'; // | "league";
 
 // For a match, winning is determined by game count (e.g. best of X or race to X wins)
 export interface Match {
 	id: string;
-	gameType: GameType;
+	gameType: GameTypeKeysWithAll;
 	matchType: MatchType;
 	// The number of games a competitor needs to win the match.
 	targetGames: number;

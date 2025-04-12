@@ -1,20 +1,17 @@
 import { BasePage } from '@/components/ui/PageLayouts/BasePage';
-import { H1, H3 } from '@/components/ui/Typography';
+import { H1 } from '@/components/ui/Typography';
 import React, { useCallback, useState } from 'react';
 import { TextInput as RNTextInput } from 'react-native';
 import { Column, Row } from '@/components/ui/Flex/Flex';
 import styled from 'styled-components/native';
-import { GameTabKey, GameTabSelector } from '@/features/Games/components/GameTabSelector';
 import { Switch } from '@/components/ui/Switch';
 import { SIZES } from '@/constants/design-tokens';
 import { NavBar } from '@/components/ui/NavBar/NavBar';
-import { IconSymbol } from '@/components/ui/Icons/IconSymbol';
 import { IconButton } from '@/components/ui/Buttons/IconButton';
 import { useRouter } from 'expo-router';
-import { WinCriteriaNumInput } from '@/features/GamePlay/components/WinCriteriaNumInput';
 import { WinCriteriaInputGroup } from '@/features/GamePlay/components/WinCriteriaInputGroup';
-import { GameSelectorHeading } from '@/features/GamePlay/components/GameSelectorHeading';
-import { NavBackIcon } from '@/components/ui/NavBar/NavBackIcon';
+import { GameSelectorHeading } from '@/features/GamePlay/components/GameSelectorHeading/GameSelectorHeading';
+import { GameTypeKeys, GameTypeKeysWithAll } from '@/features/Games/constants';
 
 const DEFAULT_WIN_CRITERIA_BY_GAME = {
 	'8ball': {
@@ -79,20 +76,16 @@ export default function CreateGamePage({}: Props) {
 	const router = useRouter();
 
 	const [inputValues, setInputValue] = useState({});
-	const [selectedGame, setSelectedGame] = useState<GameTabKey>('8ball');
+	const [selectedGame, setSelectedGame] = useState<GameTypeKeys>('8ball');
 	const [isHandicapped, setIsHandicapped] = useState(false);
 
-	const handleSelectedGameOnChange = (id: GameTabKey) => {
-		setSelectedGame(id);
+	const handleSelectedGameOnChange = (id: GameTypeKeysWithAll) => {
+		setSelectedGame(id as GameTypeKeys);
 	};
 
 	const handleHandicappedOnChange = (handicapped: boolean) => {
 		setIsHandicapped(handicapped);
 	};
-
-	const bottomGameTabs = useCallback(() => (
-		<GameTabSelector onChange={handleSelectedGameOnChange} selectedGameTab={selectedGame} showBottomBorder/>
-	), [handleSelectedGameOnChange, selectedGame]);
 
 	const navBar = useCallback(() => (
 		<NavBar horizontalAlignment='right'>
@@ -103,15 +96,11 @@ export default function CreateGamePage({}: Props) {
 		</NavBar>
 	), [isHandicapped]);
 
-	const handleNavToHomePage = useCallback(() => {
-		router.push('/(tabs)/(home)');
-	}, []);
-
 	const handleNavToGamePlay = useCallback(() => {
 		router.push('/(tabs)/(game_play)');
 	}, []);
 
-	const playButton = useCallback(() => (
+	const playFAButton = useCallback(() => (
 		<IconButton iconName="play.fill" onPress={handleNavToGamePlay}/>
 	), []);
 
@@ -119,7 +108,7 @@ export default function CreateGamePage({}: Props) {
 
 	return (
 		<BasePage renderNavBarComponent={navBar}
-				  renderFABComponent={playButton}
+				  renderFABComponent={playFAButton}
 		>
 			<GameSelectorHeading selectedGame={selectedGame} onChange={handleSelectedGameOnChange}/>
 

@@ -1,14 +1,6 @@
 import { Tabs } from '@/components/ui/Tabs';
-import { useMemo, useState } from 'react';
-import { GameNames, GameTypes } from '@/types/types';
-
-export const HEADER_TAB_MAP = {
-	'8ball': '8 Ball',
-	'9ball': '9 Ball',
-	'10ball': '10 Ball',
-	'onePocket': 'One Pocket',
-	'straightPool': 'Straight Pool',
-};
+import { useMemo } from 'react';
+import { GameTypeKeysWithAll } from '@/features/Games/constants';
 
 const ALL_TAB = {
 	id: 'all',
@@ -38,7 +30,7 @@ const TABS = [
 	},
 ];
 
-export type GameTabKey = Exclude<keyof GameTypes, 'banks'> | 'all';
+export type GameTabKey = Exclude<GameTypeKeysWithAll, 'banks'>;
 
 type Props = {
 	selectedGameTab: GameTabKey;

@@ -1,22 +1,12 @@
 import { View } from 'react-native';
 import { Column, Row } from '@/components/ui/Flex/Flex';
-import { Card } from '@/components/ui/Card';
-import { Body, H3 } from '@/components/ui/Typography';
+import { Body } from '@/components/ui/Typography';
 import { PieChart } from 'react-native-gifted-charts';
-import { GameTabKey, GameTabSelector } from '@/features/Games/components/GameTabSelector';
+import { GameTabKey } from '@/features/Games/components/GameTabSelector';
 import { useMemo, useState } from 'react';
 import { FAKE_WIN_LOSS_STATS } from '@/features/Home/constants';
 import { SIZES } from '@/constants/design-tokens';
-import { GameSelectorHeading } from '@/features/GamePlay/components/GameSelectorHeading';
-
-const HEADER_TAB_MAP = {
-	'all': 'All Games',
-	'8ball': '8 Ball',
-	'9ball': '9 Ball',
-	'10ball': '10 Ball',
-	'onePocket': 'One Pocket',
-	'straightPool': 'Straight Pool',
-};
+import { GameSelectorHeading } from '@/features/GamePlay/components/GameSelectorHeading/GameSelectorHeading';
 
 type Props = {}
 
@@ -41,7 +31,7 @@ export const StatsCard = ({}: Props) => {
 
 	return (
 		<Column gap={8}>
-			<GameSelectorHeading selectedGame={'9ball'} onChange={handleOnGameSelect}/>
+			<GameSelectorHeading withAll selectedGame={selectedGame} onChange={handleOnGameSelect}/>
 			<Column flexShrink={1} gap={SIZES.SM.val}>
 				<Column flexGrow={1} horizontalAlignment="center">
 					<PieChart

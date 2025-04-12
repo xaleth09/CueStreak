@@ -1,8 +1,8 @@
-import { GameTabKey } from '@/features/Games/components/GameTabSelector';
+import { GameTypeKeysWithAll } from '@/features/Games/constants';
 
 export const FAKE_LAST_5_GAMES = [
 	{
-		id: 1,
+		id: '1',
 		gameNum: 1,
 		opponentName: 'Dr. Zoidberg',
 		won: true,
@@ -11,7 +11,7 @@ export const FAKE_LAST_5_GAMES = [
 		opponentScore: 0,
 	},
 	{
-		id: 2,
+		id: '2',
 		gameNum: 2,
 		opponentName: 'Leela',
 		won: false,
@@ -20,7 +20,7 @@ export const FAKE_LAST_5_GAMES = [
 		opponentScore: 7,
 	},
 	{
-		id: 3,
+		id: '3',
 		gameNum: 3,
 		opponentName: 'Bender',
 		won: true,
@@ -29,7 +29,7 @@ export const FAKE_LAST_5_GAMES = [
 		opponentScore: 2,
 	},
 	{
-		id: 4,
+		id: '4',
 		gameNum: 4,
 		opponentName: 'Fry',
 		won: false,
@@ -38,7 +38,7 @@ export const FAKE_LAST_5_GAMES = [
 		opponentScore: 5,
 	},
 	{
-		id: 5,
+		id: '5',
 		gameNum: 5,
 		opponentName: 'Calculon',
 		won: true,
@@ -54,7 +54,7 @@ type WinLossStats = {
 	losses: number;
 };
 
-export const FAKE_WIN_LOSS_STATS: Record<GameTabKey, WinLossStats> = {
+export const FAKE_WIN_LOSS_STATS: Record<GameTypeKeysWithAll, WinLossStats> = {
 	all: { totalGames: 138, wins: 79, losses: 59 },
 	'8ball': { totalGames: 42, wins: 28, losses: 14 },
 	'9ball': { totalGames: 25, wins: 11, losses: 14 },

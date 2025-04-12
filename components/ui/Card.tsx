@@ -25,7 +25,6 @@ const Layout = styled(Column)<{
 `;
 
 export const Card = ({variant = 'solid', width = 'full', padding = SIZES.XS.val, children}: Props) => {
-
 	return (
 		<Layout variant={variant} padding={padding} $width={width}>
 			{children}

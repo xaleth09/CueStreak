@@ -1,17 +1,23 @@
 import { BasePage } from '@/components/ui/PageLayouts/BasePage';
 import { GamesList } from '@/features/Games/components/GamesList';
 import { FAKE_LAST_5_GAMES } from '@/features/Home/constants';
-import { H1, H2, H3 } from '@/components/ui/Typography';
+import { H3 } from '@/components/ui/Typography';
 import { Column } from '@/components/ui/Flex/Flex';
 import { SIZES } from '@/constants/design-tokens';
-import { GameSelectorHeading } from '@/features/GamePlay/components/GameSelectorHeading';
-import { useCallback } from 'react';
+import { GameSelectorHeading } from '@/features/GamePlay/components/GameSelectorHeading/GameSelectorHeading';
+import { useCallback, useState } from 'react';
 import { NavBar } from '@/components/ui/NavBar/NavBar';
 import { Button } from '@/components/ui/Buttons/Button';
+import { GameTypeKeysWithAll } from '@/features/Games/constants';
 
 type Props = {}
 
 export default function GamesPage({}: Props) {
+	const [selectedGame, setSelectedGame] = useState<GameTypeKeysWithAll>('8ball');
+
+	const handleOnGameSelect = (id: GameTypeKeysWithAll) => {
+		setSelectedGame(id);
+	};
 
 	const navBar = useCallback(() => (
 		<NavBar>
@@ -23,7 +29,7 @@ export default function GamesPage({}: Props) {
 		<BasePage hasTabBar
 				  renderNavBarComponent={navBar}
 		>
-			<GameSelectorHeading selectedGame={'9ball'} onChange={() => {}}/>
+			<GameSelectorHeading withAll selectedGame={selectedGame} onChange={handleOnGameSelect}/>
 			<Column paddingTop={SIZES.XS.val}>
 				<H3>In Progress</H3>
 				<GamesList games={[...FAKE_LAST_5_GAMES]}/>
