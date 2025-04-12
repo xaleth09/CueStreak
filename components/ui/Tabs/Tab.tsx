@@ -1,4 +1,4 @@
-import { Text, Pressable } from 'react-native';
+import { Pressable } from 'react-native';
 import styled from 'styled-components/native';
 import { useState } from 'react';
 import { Row } from '@/components/ui/Flex/Flex';
