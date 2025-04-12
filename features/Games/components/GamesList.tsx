@@ -23,7 +23,7 @@ export const GamesList = ({games}: Props) => {
 	const router = useRouter();
 
 	const handleNavigateToGameDetails = useCallback((id: string) => {
-		router.push('/(tabs)/(games)/game_details');
+		router.push('/_modals/game_details');
 	}, []);
 
 	return (
