@@ -1,1 +1,1 @@
-export { default } from '../../../features/GamePlay/CreateGamePage';
+export { default } from '@/features/GameCreation/CreateGamePage';

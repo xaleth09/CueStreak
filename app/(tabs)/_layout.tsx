@@ -8,7 +8,7 @@ import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useNavigationState, useRoute } from '@react-navigation/native';
+import { useNavigationState } from '@react-navigation/native';
 import { ROUTES_WITHOUT_TAB_BAR, RoutesWithoutTabBar } from '@/app/_routesWithoutTabBar';
 import { SIZES, TAB_BAR_HEIGHT } from '@/constants/design-tokens';
 

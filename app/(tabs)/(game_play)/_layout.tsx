@@ -13,6 +13,12 @@ export default function GamesLayout() {
 					title: 'Game Play',
 				}}
 			/>
+			<Stack.Screen
+				name="game_in_progress"
+				options={{
+					title: 'Game In Progress',
+				}}
+			/>
 		</Stack>
 	);
 }

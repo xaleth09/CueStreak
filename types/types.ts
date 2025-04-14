@@ -21,11 +21,10 @@ export interface Competitor {
 // Winning criteria for a game.
 // "ballCount": game is won when a competitor reaches a specified ball count.
 // "winLoss": game outcome is recorded simply as win or loss (could be derived from ballCount).
-// "purePoints": game is scored purely on accumulated points.
-export type GameWinningCriteria = 'ballCount' | 'winLoss' | 'purePoints';
+export type GameWinningCriteria = 'ballCount' | 'winLoss';
 
 
-export type MatchStatus = 'ongoing' | 'completed' | 'forfeited' | 'aborted';
+export type MatchStatus = 'inProgress' | 'completed' | 'forfeit' | 'aborted';
 export type MatchType = 'traditional'; // | "league";
 
 // For a match, winning is determined by game count (e.g. best of X or race to X wins)

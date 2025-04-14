@@ -12,9 +12,9 @@ export const Divider = styled(View)<Props>`
 		background-color: ${color};
 		${direction === 'horizontal' ? `
 			height: ${SIZES.ONE.px};
-			width: 100%;
+			flex-grow: 1;
 			` : `
-			height: 100%
+			flex-grow: 1;
 			width: ${SIZES.ONE.px};
 		`}
 	`};

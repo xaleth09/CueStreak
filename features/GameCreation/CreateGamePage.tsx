@@ -9,8 +9,8 @@ import { SIZES } from '@/constants/design-tokens';
 import { NavBar } from '@/components/ui/NavBar/NavBar';
 import { IconButton } from '@/components/ui/Buttons/IconButton';
 import { useRouter } from 'expo-router';
-import { WinCriteriaInputGroup } from '@/features/GamePlay/components/WinCriteriaInputGroup';
-import { GameSelectorHeading } from '@/features/GamePlay/components/GameSelectorHeading/GameSelectorHeading';
+import { WinCriteriaInputGroup } from '@/features/GameCreation/components/WinCriteriaInputGroup';
+import { GameSelectorHeading } from '@/features/GameCreation/components/GameSelectorHeading/GameSelectorHeading';
 import { GameTypeKeys, GameTypeKeysWithAll } from '@/features/Games/constants';
 
 const DEFAULT_WIN_CRITERIA_BY_GAME = {
@@ -97,7 +97,7 @@ export default function CreateGamePage({}: Props) {
 	), [isHandicapped]);
 
 	const handleNavToGamePlay = useCallback(() => {
-		router.push('/(tabs)/(game_play)');
+		router.push('/(tabs)/(game_play)/game_in_progress');
 	}, []);
 
 	const playFAButton = useCallback(() => (

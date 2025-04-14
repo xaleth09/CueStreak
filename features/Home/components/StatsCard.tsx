@@ -6,7 +6,7 @@ import { GameTabKey } from '@/features/Games/components/GameTabSelector';
 import { useMemo, useState } from 'react';
 import { FAKE_WIN_LOSS_STATS } from '@/features/Home/constants';
 import { SIZES } from '@/constants/design-tokens';
-import { GameSelectorHeading } from '@/features/GamePlay/components/GameSelectorHeading/GameSelectorHeading';
+import { GameSelectorHeading } from '@/features/GameCreation/components/GameSelectorHeading/GameSelectorHeading';
 
 type Props = {}
 

@@ -1,6 +1,5 @@
 export const ROUTES_WITHOUT_TAB_BAR = {
-    game_details: true,
-    // '(game_play)': true,
+	game_in_progress: true,
 } as const;
 
 export type RoutesWithoutTabBar = keyof typeof ROUTES_WITHOUT_TAB_BAR;

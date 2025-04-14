@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { IconSymbol } from '@/components/ui/Icons/IconSymbol';
 import styled from 'styled-components/native';
-import { GameSelectorOptions } from '@/features/GamePlay/components/GameSelectorHeading/GameSelectorOptions';
+import { GameSelectorOptions } from '@/features/GameCreation/components/GameSelectorHeading/GameSelectorOptions';
 import { Pressable } from '@/components/ui/Pressable';
 import { GAME_TYPES, GameTypeKeysWithAll, GAME_TYPES_WITH_ALL } from '@/features/Games/constants';
 
@@ -15,29 +15,36 @@ const BigHeading = styled(H1)`
     text-align: center;
 `;
 
-
 export type GameSelectorHeadingProps = {
 	withAll?: boolean;
 	selectedGame: GameTypeKeysWithAll;
-	onChange: (id: GameTypeKeysWithAll) => void;
+	onChange?: (id: GameTypeKeysWithAll) => void;
+	disabled?: boolean;
 }
 
 
-export const GameSelectorHeading = ({selectedGame, onChange, withAll = false}: GameSelectorHeadingProps) => {
+export const GameSelectorHeading = ({selectedGame, onChange, withAll = false, disabled}: GameSelectorHeadingProps) => {
 	const [selectorOpen, setSelectorOpen] = useState(false);
 
 	const handleOnPress = () => {
+		if(disabled) return;
+
 		setSelectorOpen(!selectorOpen);
 	};
 
 	const handleOptionOnPress = (id: GameTypeKeysWithAll) => {
-		onChange(id);
+		if(disabled) return;
+
+		onChange?.(id);
 		setSelectorOpen(false);
 	};
 
 	return (
 		<View>
-			<Pressable onPress={handleOnPress}>
+			<Pressable disabled={disabled}
+					   onPress={handleOnPress}
+					   disabledBackgroundColor="transparent"
+			>
 				<Row flexShrink={1}
 					 horizontalAlignment="spaceBetween"
 					 verticalAlignment="center"
@@ -45,12 +52,12 @@ export const GameSelectorHeading = ({selectedGame, onChange, withAll = false}: G
 				>
 					<Row flexGrow={1}>
 						<BigHeading numberOfLines={2}
-									ellipsizeMode={'middle'}
+									ellipsizeMode="middle"
 						>
 							{GAME_TYPES_WITH_ALL[selectedGame].title.short}
 						</BigHeading>
 					</Row>
-					<IconSymbol name={'chevron.down'} size={SIZES.LG.val} color="black"/>
+					{!disabled ? <IconSymbol name={'chevron.down'} size={SIZES.LG.val} color="black"/> : null}
 				</Row>
 			</Pressable>
 			{selectorOpen ? (

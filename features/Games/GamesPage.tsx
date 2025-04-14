@@ -4,7 +4,7 @@ import { FAKE_LAST_5_GAMES } from '@/features/Home/constants';
 import { H3 } from '@/components/ui/Typography';
 import { Column } from '@/components/ui/Flex/Flex';
 import { SIZES } from '@/constants/design-tokens';
-import { GameSelectorHeading } from '@/features/GamePlay/components/GameSelectorHeading/GameSelectorHeading';
+import { GameSelectorHeading } from '@/features/GameCreation/components/GameSelectorHeading/GameSelectorHeading';
 import { useCallback, useState } from 'react';
 import { NavBar } from '@/components/ui/NavBar/NavBar';
 import { Button } from '@/components/ui/Buttons/Button';
