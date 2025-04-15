@@ -9,9 +9,9 @@ import { SIZES } from '@/constants/design-tokens';
 import { NavBar } from '@/components/ui/NavBar/NavBar';
 import { IconButton } from '@/components/ui/Buttons/IconButton';
 import { useRouter } from 'expo-router';
-import { WinCriteriaInputGroup } from '@/features/GameCreation/components/WinCriteriaInputGroup';
-import { GameSelectorHeading } from '@/features/GameCreation/components/GameSelectorHeading/GameSelectorHeading';
-import { GameTypeKeys, GameTypeKeysWithAll } from '@/features/Games/constants';
+import { WinCriteriaInputGroup } from '@/features/MatchCreation/components/WinCriteriaInputGroup';
+import { GameTypeSelectorHeading } from '@/features/MatchCreation/components/GameTypeSelectorHeading/GameTypeSelectorHeading';
+import { GameTypeKeys, GameTypeKeysWithAll } from '@/features/Matches/constants';
 
 const DEFAULT_WIN_CRITERIA_BY_GAME = {
 	'8ball': {
@@ -72,7 +72,7 @@ const GiantVS = styled(H1)`
 
 type Props = {}
 
-export default function CreateGamePage({}: Props) {
+export default function CreateMatchPage({}: Props) {
 	const router = useRouter();
 
 	const [inputValues, setInputValue] = useState({});
@@ -97,7 +97,7 @@ export default function CreateGamePage({}: Props) {
 	), [isHandicapped]);
 
 	const handleNavToGamePlay = useCallback(() => {
-		router.push('/(tabs)/(game_play)/game_in_progress');
+		router.push('/(tabs)/(play)/match_in_progress');
 	}, []);
 
 	const playFAButton = useCallback(() => (
@@ -110,7 +110,7 @@ export default function CreateGamePage({}: Props) {
 		<BasePage renderNavBarComponent={navBar}
 				  renderFABComponent={playFAButton}
 		>
-			<GameSelectorHeading selectedGame={selectedGame} onChange={handleSelectedGameOnChange}/>
+			<GameTypeSelectorHeading selectedGame={selectedGame} onChange={handleSelectedGameOnChange}/>
 
 			<Row gap={SIZES.XXS.val}>
 				<GiantVS>VS</GiantVS>

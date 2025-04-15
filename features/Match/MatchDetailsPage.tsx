@@ -6,7 +6,7 @@ import { NavBackIcon } from '@/components/ui/NavBar/NavBackIcon';
 
 type Props = {}
 
-export default function GameDetailsPage({}: Props) {
+export default function MatchDetailsPage({}: Props) {
 	const navBar = useCallback(() => (
 		<NavBar>
 			<NavBackIcon variant='close'/>

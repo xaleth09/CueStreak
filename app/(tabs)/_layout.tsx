@@ -61,16 +61,16 @@ export default function TabLayout() {
 				}}
 			/>
 			<Tabs.Screen
-				name="(game_play)"
+				name="(play)"
 				options={{
 					title: '',
 					tabBarIcon: ({color}) => <IconSymbol size={SIZES.XXL.val} name="plus.circle.fill" color='royalblue'/>,
 				}}
 			/>
 			<Tabs.Screen
-				name="(games)"
+				name="(matches)"
 				options={{
-					title: 'Games',
+					title: 'Matches',
 					tabBarIcon: ({color}) => <IconSymbol size={SIZES.LG.val} name="calendar.badge.clock" color={color}/>,
 				}}
 			/>

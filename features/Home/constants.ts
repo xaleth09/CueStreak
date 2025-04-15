@@ -1,4 +1,4 @@
-import { GameTypeKeysWithAll } from '@/features/Games/constants';
+import { GameTypeKeysWithAll } from '@/features/Matches/constants';
 
 export const FAKE_LAST_5_GAMES = [
 	{

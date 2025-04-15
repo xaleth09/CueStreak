@@ -5,9 +5,9 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { IconSymbol } from '@/components/ui/Icons/IconSymbol';
 import styled from 'styled-components/native';
-import { GameSelectorOptions } from '@/features/GameCreation/components/GameSelectorHeading/GameSelectorOptions';
+import { GameTypeSelectorOptions } from '@/features/MatchCreation/components/GameTypeSelectorHeading/GameTypeSelectorOptions';
 import { Pressable } from '@/components/ui/Pressable';
-import { GAME_TYPES, GameTypeKeysWithAll, GAME_TYPES_WITH_ALL } from '@/features/Games/constants';
+import { GAME_TYPES, GameTypeKeysWithAll, GAME_TYPES_WITH_ALL } from '@/features/Matches/constants';
 
 const BigHeading = styled(H1)`
     font-size: 75px;
@@ -23,7 +23,7 @@ export type GameSelectorHeadingProps = {
 }
 
 
-export const GameSelectorHeading = ({selectedGame, onChange, withAll = false, disabled}: GameSelectorHeadingProps) => {
+export const GameTypeSelectorHeading = ({selectedGame, onChange, withAll = false, disabled}: GameSelectorHeadingProps) => {
 	const [selectorOpen, setSelectorOpen] = useState(false);
 
 	const handleOnPress = () => {
@@ -61,8 +61,8 @@ export const GameSelectorHeading = ({selectedGame, onChange, withAll = false, di
 				</Row>
 			</Pressable>
 			{selectorOpen ? (
-				<GameSelectorOptions games={withAll ? GAME_TYPES_WITH_ALL : GAME_TYPES}
-									 onPress={handleOptionOnPress}
+				<GameTypeSelectorOptions games={withAll ? GAME_TYPES_WITH_ALL : GAME_TYPES}
+										 onPress={handleOptionOnPress}
 				/>
 			) : null}
 		</View>

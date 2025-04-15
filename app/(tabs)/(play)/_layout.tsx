@@ -10,13 +10,13 @@ export default function GamesLayout() {
 			<Stack.Screen
 				name="index"
 				options={{
-					title: 'Game Play',
+					title: 'Match Play',
 				}}
 			/>
 			<Stack.Screen
-				name="game_in_progress"
+				name="match_in_progress"
 				options={{
-					title: 'Game In Progress',
+					title: 'Match In Progress',
 				}}
 			/>
 		</Stack>

@@ -57,7 +57,7 @@ export const GAME_TYPES = {
 export const ALL_GAME_TYPE = {
 	all: {
 		title: {
-			full: 'All Games',
+			full: 'All Matches',
 			short: 'All',
 		},
 	},

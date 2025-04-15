@@ -1,7 +1,7 @@
 import { SIZES } from '@/constants/design-tokens';
 import { H3 } from '@/components/ui/Typography';
 import { Column, Row } from '@/components/ui/Flex/Flex';
-import { WinCriteriaNumInput } from '@/features/GameCreation/components/WinCriteriaNumInput';
+import { WinCriteriaNumInput } from '@/features/MatchCreation/components/WinCriteriaNumInput';
 import React from 'react';
 
 type Props = {

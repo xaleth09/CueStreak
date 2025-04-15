@@ -5,7 +5,7 @@ export type GameHighlight = {
     gameNum: number;
     opponentName: string;
     status?: MatchStatus;
-    won?: boolean;
+    winningPlayerId?: string;
     winCriteria: number;
     playerScore: number;
     opponentScore: number;

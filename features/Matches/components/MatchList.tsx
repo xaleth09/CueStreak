@@ -1,8 +1,8 @@
 import { View } from 'react-native';
-import { GameHighlight } from '@/features/Games/types';
+import { GameHighlight } from '@/features/Matches/types';
 import styled from 'styled-components/native';
 import { Row } from '@/components/ui/Flex/Flex';
-import { GameHighlightRow } from '@/features/Games/components/GameHighlightRow';
+import { MatchHighlightRow } from '@/features/Matches/components/MatchHighlightRow';
 import { useCallback } from 'react';
 import { useRouter } from 'expo-router';
 
@@ -16,35 +16,35 @@ const BorderedRow = styled(Row)<{ lastRow: boolean }>`
 `;
 
 type Props = {
-	games: GameHighlight[];
+	matches: GameHighlight[];
 }
 
-export const GamesList = ({games}: Props) => {
+export const MatchList = ({matches}: Props) => {
 	const router = useRouter();
 
 	const handleNavigateToGameDetails = useCallback((id: string) => {
-		router.push('/_modals/game_details');
+		router.push('/_modals/match_details');
 	}, []);
 
 	return (
 		<View>
-			{games.map(({
+			{matches.map(({
 							id,
 							gameNum,
 							opponentName,
 							status,
-							won,
+							winningPlayerId,
 							winCriteria,
 							playerScore,
 							opponentScore,
 						}, index) => (
-				<BorderedRow key={id} lastRow={index === games.length - 1}>
-					<GameHighlightRow
+				<BorderedRow key={id} lastRow={index === matches.length - 1}>
+					<MatchHighlightRow
 						id={id}
 						gameNum={gameNum}
 						opponentName={opponentName}
 						status={status}
-						won={won}
+						winningPlayerId={winningPlayerId}
 						winCriteria={winCriteria}
 						playerScore={playerScore}
 						opponentScore={opponentScore}

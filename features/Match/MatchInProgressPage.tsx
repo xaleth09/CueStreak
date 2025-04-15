@@ -2,9 +2,9 @@ import { BasePage } from '@/components/ui/PageLayouts/BasePage';
 import styled from 'styled-components/native';
 import { Column, Row } from '@/components/ui/Flex/Flex';
 import { Body, H1, H3, H4 } from '@/components/ui/Typography';
-import { GameSelectorHeading } from '@/features/GameCreation/components/GameSelectorHeading/GameSelectorHeading';
+import { GameTypeSelectorHeading } from '@/features/MatchCreation/components/GameTypeSelectorHeading/GameTypeSelectorHeading';
 import { TextInput } from 'react-native';
-import { MATCH_ONE_POCKET, MATCH_STRAIGHT_POOL } from '@/features/Game/constants';
+import { MATCH_ONE_POCKET, MATCH_STRAIGHT_POOL } from '@/features/Match/constants';
 import { Divider } from '@/components/ui/Divider';
 import React, { useCallback } from 'react';
 import { IconSymbol } from '@/components/ui/Icons/IconSymbol';
@@ -47,7 +47,7 @@ const COLORS = ['orchid', 'skyblue', 'tomato'];
 
 type Props = {}
 
-export default function GameInProgressPage({}: Props) {
+export default function MatchInProgressPage({}: Props) {
 
 	const {
 		status,
@@ -65,7 +65,7 @@ export default function GameInProgressPage({}: Props) {
 
 	return (
 		<BasePage hasTabBar renderNavBarComponent={navBar}>
-			<GameSelectorHeading disabled selectedGame={gameType}/>
+			<GameTypeSelectorHeading disabled selectedGame={gameType}/>
 			{Object.entries(players).map(([playerId, {
 				playerName,
 				ballCountCriteria,
@@ -75,7 +75,7 @@ export default function GameInProgressPage({}: Props) {
 			}], index) => (
 				<React.Fragment key={playerId}>
 					<ScoreLayout flexGrow={1}
-						// backgroundColor={COLORS[index]}
+						// backgroundColor={currentShooterId === playerId ? COLORS[index] : 'transparent'}
 					>
 
 						<Column paddingVertical={16}>
@@ -128,41 +128,41 @@ export default function GameInProgressPage({}: Props) {
 						<Row verticalAlignment="center">
 							<Divider/>
 
-							{/*<PillButtons*/}
-							{/*	// paddingHorizontal={16}*/}
-							{/*	// paddingVertical={12}*/}
-							{/*	horizontalAlignment="spaceBetween"*/}
-							{/*>*/}
+							<PillButtons
+								// paddingHorizontal={16}
+								// paddingVertical={12}
+								horizontalAlignment="spaceBetween"
+							>
 
-							{/*	<PillButton backgroundColor="royalblue">*/}
-							{/*		<IconSymbol name="plus" color="white"/>*/}
-							{/*	</PillButton>*/}
+								<PillButton backgroundColor="royalblue">
+									<IconSymbol name="plus" color="white"/>
+								</PillButton>
 
-							{/*	<Divider direction={'vertical'}/>*/}
+								<Divider direction={'vertical'}/>
 
-							{/*	<PillButton backgroundColor="lightgray">*/}
-							{/*		<IconSymbol name="arrow.counterclockwise" color="black"/>*/}
-							{/*	</PillButton>*/}
+								<PillButton backgroundColor="lightgray">
+									<IconSymbol name="arrow.counterclockwise" color="black"/>
+								</PillButton>
 
-							{/*	<Divider direction={'vertical'}/>*/}
+								<Divider direction={'vertical'}/>
 
-							{/*	<PillButton backgroundColor="lightgray">*/}
-							{/*		<IconSymbol name="arrow.up.arrow.down" color="black"/>*/}
-							{/*	</PillButton>*/}
+								<PillButton backgroundColor="lightgray">
+									<IconSymbol name="arrow.up.arrow.down" color="black"/>
+								</PillButton>
 
-							{/*	<Divider direction={'vertical'}/>*/}
+								<Divider direction={'vertical'}/>
 
-							{/*	<PillButton backgroundColor="lightgray">*/}
-							{/*		<IconSymbol name="arrow.clockwise" color="black"/>*/}
-							{/*	</PillButton>*/}
+								<PillButton backgroundColor="lightgray">
+									<IconSymbol name="arrow.clockwise" color="black"/>
+								</PillButton>
 
-							{/*	<Divider direction={'vertical'}/>*/}
+								<Divider direction={'vertical'}/>
 
-							{/*	<PillButton backgroundColor="tomato">*/}
-							{/*		<IconSymbol name="minus" color="white"/>*/}
-							{/*	</PillButton>*/}
+								<PillButton backgroundColor="tomato">
+									<IconSymbol name="minus" color="white"/>
+								</PillButton>
 
-							{/*</PillButtons>*/}
+							</PillButtons>
 
 							<Divider/>
 						</Row>

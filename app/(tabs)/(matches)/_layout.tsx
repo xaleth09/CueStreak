@@ -10,7 +10,7 @@ export default function GamesLayout() {
 			<Stack.Screen
 				name="index"
 				options={{
-					title: 'Games'
+					title: 'Matches'
 				}}
 			/>
 		</Stack>

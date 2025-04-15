@@ -1,5 +1,5 @@
 import { MatchStatus } from '@/types/types';
-import { GameTypeKeys } from '@/features/Games/constants';
+import { GameTypeKeys } from '@/features/Matches/constants';
 
 export const MATCH_ONE_POCKET = {
 	date_created: '',

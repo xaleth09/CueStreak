@@ -5,17 +5,17 @@
 
 // A Competitor is the match-specific entity representing a solo player or team.
 // Even in a 1v1, a new Competitor record is created for match-specific state.
-import { GameTypeKeysWithAll } from '@/features/Games/constants';
+import { GameTypeKeysWithAll } from '@/features/Matches/constants';
 
 export interface Competitor {
 	id: string;             // Unique within the match
 	name: string;           // Team name or individual name
 	playerIds: string[];    // Solo: one element; team: multiple user IDs.
-	// For simplicity, we store no score here; game scores are maintained per Games.
+	// For simplicity, we store no score here; game scores are maintained per Matches.
 }
 
 // --------------------------
-// Games and History Types
+// Matches and History Types
 // --------------------------
 
 // Winning criteria for a game.
@@ -63,7 +63,7 @@ export interface Action {
 	count: number;
 }
 
-// A Games represents one discrete event within a match.
+// A Matches represents one discrete event within a match.
 // It records the final scores (or ball counts) for each competitor,
 // along with a turn-based history of how the game evolved.
 export interface Game {

@@ -9,7 +9,7 @@ export default function ModalsLayout() {
 
 			}}
 		>
-			<Stack.Screen name="game_details"  options={{
+			<Stack.Screen name="match_details"  options={{
 				headerShown: false,
 			}} />
 		</Stack>

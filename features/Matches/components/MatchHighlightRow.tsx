@@ -18,18 +18,21 @@ type Props = {
 	gameNum: number;
 	opponentName: string;
 	status?: MatchStatus;
-	won?: boolean;
+	winningPlayerId?: string;
 	winCriteria: number;
 	playerScore: number;
 	opponentScore: number;
 	onPress?: (id: string) => void;
 }
 
-export const GameHighlightRow = ({
+const CURRENT_USER_ID = '123'
+
+export const MatchHighlightRow = ({
 									 id,
 									 gameNum,
+									 status,
 									 opponentName,
-									 won,
+									 winningPlayerId,
 									 winCriteria,
 									 playerScore,
 									 opponentScore,
@@ -95,7 +98,7 @@ export const GameHighlightRow = ({
 					 verticalAlignment="center"
 				>
 					<H2 numberOfLines={1} ellipsizeMode="tail">
-						{won ? 'Win!' : 'Loss'}
+						{winningPlayerId === CURRENT_USER_ID ? 'Win!' : 'Loss'}
 					</H2>
 				</Row>
 			</Row>

@@ -7,7 +7,7 @@ import { Card } from '@/components/ui/Card';
 import { Divider } from '@/components/ui/Divider';
 import styled from 'styled-components/native';
 import { View } from 'react-native';
-import { GameTypeKeysWithAll, GameTypes, GameTypesWithAll } from '@/features/Games/constants';
+import { GameTypeKeysWithAll, GameTypes, GameTypesWithAll } from '@/features/Matches/constants';
 
 const AbsolutelyPositionedWrapper = styled(View)`
     top: 90px;
@@ -21,7 +21,7 @@ type Props = {
 	onPress: (id: GameTypeKeysWithAll) => void;
 }
 
-export const GameSelectorOptions = ({games, onPress}: Props) => {
+export const GameTypeSelectorOptions = ({games, onPress}: Props) => {
 
 	return (
 		<AbsolutelyPositionedWrapper>

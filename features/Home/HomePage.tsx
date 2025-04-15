@@ -2,13 +2,14 @@ import { H1, H3 } from '@/components/ui/Typography';
 import { UserStats } from '@/types/types';
 import { BasePage } from '@/components/ui/PageLayouts/BasePage';
 import { StatsCard } from '@/features/Home/components/StatsCard';
-import { RecentGamesSection } from './components/RecentGamesSection';
+import { RecentMatchesSection } from './components/RecentMatchesSection';
 import { useCallback } from 'react';
 import { NavBar } from '@/components/ui/NavBar/NavBar';
 import { SIZES } from '@/constants/design-tokens';
 import { Divider } from '@/components/ui/Divider';
 import { IconSymbol } from '@/components/ui/Icons/IconSymbol';
 import { Row } from '@/components/ui/Flex/Flex';
+import { InProgressGamesSection } from '@/features/Home/components/InProgressGamesSection';
 
 const FAKE_USER_STAT = {
 	totalWins: 1,
@@ -75,7 +76,8 @@ export default function HomeScreen() {
 		>
 			<StatsCard/>
 			<Divider/>
-			<RecentGamesSection/>
+			<InProgressGamesSection/>
+			<RecentMatchesSection/>
 		</BasePage>
 	);
 };
